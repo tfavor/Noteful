@@ -1,0 +1,16 @@
+
+.NoteListMain>ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.NoteListMain>ul>li {
+    width: 95%;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+button {
+    margin-bottom: 15px;
+}
