@@ -3,10 +3,15 @@ import { NavLink, Link } from 'react-router-dom'
 import './AddNote.css'
 import config from '../config';
 import ApiContext from '../ApiContext';
+import VerifyFolder from '../verifyFolder/VerifyFolder'
 
 export default class AddNote extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            name: '',
+            touched: false,
+        }
       }
       static contextType = ApiContext;
 
@@ -47,6 +52,17 @@ export default class AddNote extends Component {
         ));
     }
 
+    updateName(name) {
+        this.setState({ name: name, touched: true });
+      }
+
+    validateName() {
+    const name = this.state.name;
+    if (name === '') {
+      return 'Name is required'
+    }
+}
+
 
     render() {
         return (
@@ -55,7 +71,8 @@ export default class AddNote extends Component {
                 <fieldset>
                 <label for='new-note-name'>
                     <span className='name'>name: </span>
-                    <input type='text' id='name'></input>
+                    <input type='text' id='name' onChange={e => this.updateName(e.target.value)}/>
+                    { this.state.touched && <VerifyFolder message={this.validateName()}/>}
                 </label>
                 <label for='new-note-Content'>
                     <span className='content'>content: </span>
@@ -67,7 +84,7 @@ export default class AddNote extends Component {
                         {this.renderOptions()}
                     </select>
                 </label>
-                <button type='submit'>Add</button>
+                <button type='submit' disabled={this.validateName()}>Add</button>
                 </fieldset>
             </form>
         )
