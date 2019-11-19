@@ -11,20 +11,24 @@ export default class NoteListMain extends Component {
         }
       }
     static contextType = ApiContext;
-    
+
     render() {
         const {folderId} = this.props.match.params;
-        const { notes=[] } = this.context;
-        const notesForFolder = (!folderId) ? notes : notes.filter(note => note.folderId === folderId);
+        const idForFolder = parseInt(folderId, 10)
+        const { notes=[], folders=[] } = this.context;
+        const notesForFolder = (!idForFolder) ? notes : notes.filter(note => note.folder_id === idForFolder);
+        const folder = folders.find(folder => folder.id === idForFolder)
         return (
             <div className="NoteListMain">
+              {folder === undefined ? <h2>all notes</h2> : <h2>{folder.title} > notes</h2>}
                <ul>
                     {notesForFolder.map(note =>
                     <li key={note.id}>
                       <Note 
+                      className="link"
                       id={note.id}
-                      name={note.name}
-                      modified={note.modified}/>
+                      name={note.title}
+                      />
                     </li>
                     )}
                 </ul>

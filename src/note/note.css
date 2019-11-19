@@ -1,9 +1,27 @@
 .note {
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    width: 100%;
 }
-h3 {
+ h3 {
     margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 p {
     margin-left: 10px;
+}
+.note-delete {
+    margin-bottom: 5px;
+    margin-bottom: 0;
+    background-color: rgb(178,188,195);
+    color: red;
+    font-size: 15px;
+}
+.note-link {
+    text-overflow: ellipsis;
+    width: calc(100% - 60px);
 }

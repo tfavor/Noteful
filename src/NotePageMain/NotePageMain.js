@@ -14,11 +14,28 @@ export default class NotePageMain extends Component {
 
     render() {
         const {noteId} = this.props.match.params;
-        const { notes=[] } = this.context;
-        const note = notes.find(note => note.id === noteId);
+        const idForNote = parseInt(noteId, 10)
+        const { notes=[], folders=[] } = this.context;
+        const note = notes.find(note => note.id === idForNote);
+        const folder = folders.find(folder => folder.id === note.folder_id)
+        console.log(idForNote)
         return (
             <div className='NotePageMain'>
-                <h3>{note.name}</h3>
+                <h3>{folder.title} > {note.title}</h3>
+                <Link
+                className="edit-link"
+                to={{
+                    pathname: `/note/${note.id}/edit-note`,
+                    state: {
+                        id: note.id,
+                        title: note.title,
+                        content: note.content,
+                        folder_id: note.folder_id,
+                        folderTitle: folder.title,
+                    }
+                    }}>
+                <button>edit note</button>
+                </Link>
                 <div className='notePageContent'>{note.content}</div>
             </div>
         )

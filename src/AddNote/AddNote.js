@@ -4,12 +4,15 @@ import './AddNote.css'
 import config from '../config';
 import ApiContext from '../ApiContext';
 import VerifyFolder from '../verifyFolder/VerifyFolder'
+/*import { getDefaultWatermarks } from 'istanbul-lib-report';
+import { getEnabledCategories } from 'trace_events';*/
 
 export default class AddNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            title: '',
+            content: '',
             touched: false,
         }
       }
@@ -17,15 +20,19 @@ export default class AddNote extends Component {
 
     handleNoteSubmit = (e) => {
         e.preventDefault()
-        let target = e.target['folderName'].value;
-        let folderForNote = this.context.folders.find(folder => folder.name === target)
-        let folderId = folderForNote.id
+        let target = e.target['folderTitle'].value;
+        let folderForNote = this.context.folders.find(folder => folder.title === target)
+        let folder_id = folderForNote.id
         const note = {
-            folderId: folderId,
-            name: e.target['name'].value,
+            id: Math.random(),
+            folder_id: folder_id,
+            title: this.state.title,
             content: e.target['content']. value,
-            id: Math.random().toString(),
         }
+       this.submitNewNote(note)
+    }
+
+    submitNewNote(note) {
         fetch(`${config.API_ENDPOINT}/notes`, {
             method: 'POST',
             headers: {
@@ -33,33 +40,42 @@ export default class AddNote extends Component {
             },
             body: JSON.stringify(note),
           })
-    .then(data => {
-      this.context.addNote(note);
-      this.props.history.push('/')
-    })
-    .catch(err => {
-      this.setState({
-        error: err.message
-      });
-    });
-}
+          .then(data => {
+            this.props.history.push('/')
+            this.context.addNote(note);
+            })
+        /*.then(data => {
+        this.context.addNote(note);
+        this.props.history.push('/')
+        
+        })*/
+        .catch(err => {
+        this.setState({
+            error: err.message
+        });
+        });
+    }
 
     renderOptions() {
         return this.context.folders.map(folder => (
             <option>
-            {folder.name}
+            {folder.title}
             </option>
         ));
     }
 
-    updateName(name) {
-        this.setState({ name: name, touched: true });
+    updateTitle(title) {
+        this.setState({ title: title, touched: true });
       }
 
-    validateName() {
-    const name = this.state.name;
-    if (name === '') {
-      return 'Name is required'
+      updateContent(content) {
+        this.setState({ content: content });
+      }
+
+    validateTitle() {
+    const title = this.state.title;
+    if (title === '') {
+      return 'Title is required'
     }
 }
 
@@ -68,24 +84,25 @@ export default class AddNote extends Component {
         return (
             <form className='add-note-form' onSubmit={this.handleNoteSubmit}>
                 <legend>New Note</legend>
-                <fieldset>
-                <label for='new-note-name'>
-                    <span className='name'>name: </span>
-                    <input type='text' id='name' onChange={e => this.updateName(e.target.value)}/>
-                    { this.state.touched && <VerifyFolder message={this.validateName()}/>}
-                </label>
-                <label for='new-note-Content'>
-                    <span className='content'>content: </span>
-                    <input type='text' id='content'></input>
+                <div className="title-folder">
+                <label for='new-note-title'>
+                    <span className='ntitle'>title: </span>
+                    <input type='text' id='title' onChange={e => this.updateTitle(e.target.value)}/>
+                    { this.state.touched && <VerifyFolder message={this.validateTitle()}/>}
                 </label>
                 <label for='folder-choice'>
                     <span className='folder'>folder: </span>
-                    <select id='folderName'>
+                    <select id='folderTitle'>
                         {this.renderOptions()}
                     </select>
                 </label>
-                <button type='submit' disabled={this.validateName()}>Add</button>
-                </fieldset>
+                </div>
+                <label for='new-note-Content'>
+                    <span className='content'>content: </span>
+                    <textarea type='text' id='content'></textarea>
+                </label>
+                <button type='submit' disabled={this.validateTitle()}>Add</button>
+                
             </form>
         )
     }

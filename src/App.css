@@ -3,11 +3,16 @@
   height: 100%;
 }
 header {
-  background-color: grey;
+  background-color: rgb(31,40,58);
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+.header-name {
+  color: rgb(178,188,195);
+  text-decoration: none;
 }
 header>h1 {
  margin: 0;
@@ -19,7 +24,7 @@ header>h1 {
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgb(31,40,58);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,32 +34,41 @@ header>h1 {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .nav-main {
   display: flex;
   flex-direction: row;
   height: calc(100% - 70px);
+  overflow: auto;
 }
 nav {
-  width: 25%;
-  border: 1px solid black;
+  width: 150px;
   border-right: none;
-  background-color: lightgrey;
+  background-color: rgb(178,188,195);
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 0px;  
+  background: transparent;  
 }
 main {
-  width: 75%;
+  width: calc(100% - 150px);
   border: 1px solid black;
-  background-color: darkgrey;
+  border-top:none;
+  border-right: none;
+  background-color: rgb(178,188,195);
   overflow: auto;
+}
+
+/*smart Phone*/
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+}
+/*tablit*/
+@media only screen and (min-width : 768px) {
+  nav {
+    width: 300px;
+  }
+  main{
+    width: calc(100% - 300px);
+  }
 }

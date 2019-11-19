@@ -10,7 +10,7 @@ export default class AddFolder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            title: '',
             touched: false
         }
       }
@@ -19,10 +19,10 @@ export default class AddFolder extends Component {
 
 
     handleFolderSubmit = (e) => {
+      console.log(this.state.title)
         e.preventDefault()
         const folder = {
-            id: Math.random().toString(),
-            name: e.target['name'].value,
+            title: this.state.title/*e.target['title'].value,*/
         }
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
@@ -33,7 +33,7 @@ export default class AddFolder extends Component {
           })
     .then(data => {
       console.log(data);
-      this.context.addFolder(folder);
+      this.context.addFolder(data);
       this.props.history.push('/')
     })
     .catch(err => {
@@ -43,14 +43,14 @@ export default class AddFolder extends Component {
     });
     }
 
-    updateName(name) {
-        this.setState({ name: name, touched: true });
+    updateTitle(title) {
+        this.setState({ title: title, touched: true });
       }
 
-    validateName() {
-    const name = this.state.name;
-    if (name === '') {
-      return 'Name is required'
+    validateTitle() {
+    const title = this.state.title;
+    if (title === '') {
+      return 'Title is required'
     }
 }
 
@@ -62,10 +62,10 @@ export default class AddFolder extends Component {
                 <fieldset>
                 <label for='new-folder-name'>
                     <span className=''>name: </span>
-                   <input type='text' id='new-folder-name' name='name' onChange={e => this.updateName(e.target.value)}/>
-                   { this.state.touched && <VerifyFolder message={this.validateName()}/>}
+                   <input type='text' id='new-folder-title' name='title' onChange={e => this.updateTitle(e.target.value)}/>
+                   { this.state.touched && <VerifyFolder message={this.validateTitle()}/>}
                 </label>
-                <button type='submit' disabled={this.validateName()}>Add</button>
+                <button type='submit' disabled={this.validateTitle()}>Add</button>
                 </fieldset>
             </form>
         )

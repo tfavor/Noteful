@@ -1,0 +1,18 @@
+.update-note-form {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+.update {
+    background-color: red;
+}
+    h1 {
+    color: red;
+}
+.update-note-form > button {
+    margin-left: 20px;
+    width: 60px;
+    height: 30px;
+}

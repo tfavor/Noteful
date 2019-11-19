@@ -1,0 +1,6 @@
+.NotePageNav {
+   text-align: right;
+}
+.NotePageNav > button {
+    margin-right: 20px;
+}

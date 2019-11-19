@@ -1,13 +1,50 @@
-.add-note-form {
+ .add-note-form {
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 20px;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 fieldset {
     text-align: left;
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.title-folder {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+span {
+    
+}
+#content {
+    width: calc(100% - 60px);
+    height: 200px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+legend {
+    text-align: left;
+    margin-left: 10px;
+    opacity: 0.6;
+    font-size: 13px;
+}
+.add-note-form > button {
+    margin-left: 20px;
+    width: 60px;
+    height: 30px;
 }

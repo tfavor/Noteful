@@ -7,10 +7,19 @@
     align-items: center;
 }
 .NoteListMain>ul>li {
-    width: 95%;
+    width: 75%;
     margin-top: 10px;
-    border: 1px solid black;
+    margin-bottom: 0;
+    border-bottom: 1px solid black;
+    padding: 0;
 }
 button {
     margin-bottom: 15px;
+}
+ h3 {
+    color: rgb(31,40,58);
+    margin: 0;
+}
+.note-link {
+    text-decoration: none;
 }

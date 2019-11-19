@@ -1,3 +1,22 @@
+.NotePageMain {
+    margin-top: 10px;
+    text-align: right;
+}
+.NotePageMain > h3 {
+    text-align: left;
+    margin-left: 10px;
+    opacity: 0.6;
+    font-size: 13px;
+}
 .notePageContent {
-    border: 1px solid black;
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+.edit-link > button {
+    margin-right: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    height: 20px;
 }
