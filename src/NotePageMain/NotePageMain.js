@@ -18,7 +18,6 @@ export default class NotePageMain extends Component {
         const { notes=[], folders=[] } = this.context;
         const note = notes.find(note => note.id === idForNote);
         const folder = folders.find(folder => folder.id === note.folder_id)
-        console.log(idForNote)
         return (
             <div className='NotePageMain'>
                 <h3>{folder.title} > {note.title}</h3>

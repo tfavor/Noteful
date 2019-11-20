@@ -44,11 +44,6 @@ export default class AddNote extends Component {
             this.props.history.push('/')
             this.context.addNote(note);
             })
-        /*.then(data => {
-        this.context.addNote(note);
-        this.props.history.push('/')
-        
-        })*/
         .catch(err => {
         this.setState({
             error: err.message
@@ -58,7 +53,8 @@ export default class AddNote extends Component {
 
     renderOptions() {
         return this.context.folders.map(folder => (
-            <option>
+            <option
+            key={folder.id}>
             {folder.title}
             </option>
         ));
@@ -85,19 +81,19 @@ export default class AddNote extends Component {
             <form className='add-note-form' onSubmit={this.handleNoteSubmit}>
                 <legend>New Note</legend>
                 <div className="title-folder">
-                <label for='new-note-title'>
+                <label>
                     <span className='ntitle'>title: </span>
                     <input type='text' id='title' onChange={e => this.updateTitle(e.target.value)}/>
                     { this.state.touched && <VerifyFolder message={this.validateTitle()}/>}
                 </label>
-                <label for='folder-choice'>
+                <label >
                     <span className='folder'>folder: </span>
                     <select id='folderTitle'>
                         {this.renderOptions()}
                     </select>
                 </label>
                 </div>
-                <label for='new-note-Content'>
+                <label >
                     <span className='content'>content: </span>
                     <textarea type='text' id='content'></textarea>
                 </label>

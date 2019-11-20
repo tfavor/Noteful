@@ -60,7 +60,7 @@ export default class AddFolder extends Component {
             <form className='add-folder-form' onSubmit={e => this.handleFolderSubmit(e)}>
                 <legend>New Forlder</legend>
                 <fieldset>
-                <label for='new-folder-name'>
+                <label>
                     <span className=''>name: </span>
                    <input type='text' id='new-folder-title' name='title' onChange={e => this.updateTitle(e.target.value)}/>
                    { this.state.touched && <VerifyFolder message={this.validateTitle()}/>}

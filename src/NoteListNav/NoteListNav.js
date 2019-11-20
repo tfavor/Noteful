@@ -29,6 +29,7 @@ export default class NoteListNav extends Component {
 
     render() {
         const { folders=[], notes=[] } = this.context
+        console.log(this.context)
         return (
             <div className='noteListNav'>
                 <h2>folders</h2>

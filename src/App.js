@@ -54,7 +54,7 @@ class App extends Component {
          path={path}
          component={NoteListNav}/> 
       ))}
-        <Route  path='/note/:noteId' component={NotePageNav}/>
+        <Route path='/note/:noteId' component={NotePageNav}/>
         <Route path="/add-folder" component={NotePageNav} />
         <Route path="/add-note" component={NotePageNav} />
         
@@ -83,9 +83,6 @@ class App extends Component {
   } 
   handleAddFolder = folder => {
     this.getAllNotes()
-    /*this.setState ({
-      folders: [...this.state.folders, folder],
-    });*/
   };
   handleAddNote = (note) => {
     this.getAllNotes()
@@ -95,7 +92,6 @@ class App extends Component {
     this.setState({
       notes: newNotes
     })
-    console.log(this.state.notes)
   }
   handleDeleteFolder = (id) =>{
     const newFolders = this.state.folders.filter(folder => folder.id !== id)
@@ -120,7 +116,6 @@ class App extends Component {
       addNote: this.handleAddNote,
       updateNote: this.handleUpdateNote,
   };
-  console.log(this.state.notes)
     return (
       <ApiContext.Provider value={value}>
       <div className="App">

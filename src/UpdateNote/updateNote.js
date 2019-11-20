@@ -72,35 +72,34 @@ export default class UpdateNote extends Component {
     }
     renderOptions() {
         return this.context.folders.map(folder => (
-            <option>
+            <option
+            key={folder.id}>
             {folder.title}
             </option>
         ));
     }
 
     render() {
-        console.log(this.props.history)
         const {noteId} = this.props.match.params;
         const idForNote = parseInt(noteId, 10);
         const { notes=[] } = this.context;
         const note = notes.find(note => note.id === idForNote);
-        console.log(note)
         return (
            <form className='update-note-form' onSubmit={this.handleNoteUpdate}>
                <legend>update note</legend>
                <div className="title-folder">
-               <label for="title">
+               <label >
                    <span>title</span>
                    <input id="title" value={this.state.title} onChange={e => this.handleTitleChange(e.target.value)}/>
                </label>
-               <label for='new-folder-choice'>
+               <label >
                     <span className='new-folder'>folder </span>
-                    <select id='new-folderTitle' value={this.state.folderTitle}>
+                    <select id='new-folderTitle' defaultValue={this.state.folderTitle}>
                         {this.renderOptions()}
                     </select>
                 </label>
                 </div>
-                <label for="content">
+                <label >
                    <span>content</span>
                    <textarea id="content" value={this.state.content} onChange={e => this.handleContentChange(e.target.value)}/>
                </label>
